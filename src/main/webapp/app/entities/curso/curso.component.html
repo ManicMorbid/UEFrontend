@@ -1,0 +1,82 @@
+<div>
+    <h2>
+        <span>Cursos</span>
+        <button class="btn btn-primary float-right jh-create-entity create-curso" [routerLink]="['/', { outlets: { popup: ['curso-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Curso
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="cursos">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Nivel</span></th>
+            <th><span>Grado</span></th>
+            <th><span>Paralelo</span></th>
+            <th><span>Gestion</span></th>
+            <th><span>Ambiente</span></th>
+            <th><span>Materia</span></th>
+            <th><span>Estudiante</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let curso of cursos ;trackBy: trackId">
+                <td><a [routerLink]="['../curso', curso.id ]">{{curso.id}}</a></td>
+                <td>{{curso.nivel}}</td>
+                <td>{{curso.grado}}</td>
+                <td>{{curso.paralelo}}</td>
+                <td>{{curso.gestion}}</td>
+                <td>
+                    <div *ngIf="curso.ambiente">
+                        <a [routerLink]="['../ambiente', curso.ambiente?.id ]" >{{curso.ambiente?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <span *ngFor="let materia of curso.materias; let last = last">
+                            <a class="form-control-static" [routerLink]="['../materia', materia?.id ]">{{materia.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <span *ngFor="let estudiante of curso.estudiantes; let last = last">
+                            {{estudiante.id}}{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../curso', curso.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'curso/'+ curso.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'curso/'+ curso.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

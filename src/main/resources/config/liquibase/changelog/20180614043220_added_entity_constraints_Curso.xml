@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Curso.
+    -->
+    <changeSet id="20180614043220-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="ambiente_id"
+                                 baseTableName="curso"
+                                 constraintName="fk_curso_ambiente_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ambiente"/>
+
+        <addForeignKeyConstraint baseColumnNames="cursos_id"
+                                 baseTableName="curso_materia"
+                                 constraintName="fk_curso_materia_cursos_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="curso"/>
+        <addForeignKeyConstraint baseColumnNames="materias_id"
+                                 baseTableName="curso_materia"
+                                 constraintName="fk_curso_materia_materias_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="materia"/>
+        
+        <addForeignKeyConstraint baseColumnNames="cursos_id"
+                                 baseTableName="curso_estudiante"
+                                 constraintName="fk_curso_estudiante_cursos_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="curso"/>
+        <addForeignKeyConstraint baseColumnNames="estudiantes_id"
+                                 baseTableName="curso_estudiante"
+                                 constraintName="fk_curso_estudiante_estudiantes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+        
+    </changeSet>
+</databaseChangeLog>

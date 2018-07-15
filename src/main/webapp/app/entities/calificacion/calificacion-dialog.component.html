@@ -1,0 +1,86 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myCalificacionLabel">Create or edit a Calificacion</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!calificacion.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="calificacion.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_primerbimestrecuantitativo">Primerbimestrecuantitativo</label>
+            <input type="number" class="form-control" name="primerbimestrecuantitativo" id="field_primerbimestrecuantitativo"
+                [(ngModel)]="calificacion.primerbimestrecuantitativo" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_segundobimestrecuantitativo">Segundobimestrecuantitativo</label>
+            <input type="number" class="form-control" name="segundobimestrecuantitativo" id="field_segundobimestrecuantitativo"
+                [(ngModel)]="calificacion.segundobimestrecuantitativo" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_tercerbimestrecuantitativo">Tercerbimestrecuantitativo</label>
+            <input type="number" class="form-control" name="tercerbimestrecuantitativo" id="field_tercerbimestrecuantitativo"
+                [(ngModel)]="calificacion.tercerbimestrecuantitativo" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_cuartobimestrecuantitativo">Cuartobimestrecuantitativo</label>
+            <input type="number" class="form-control" name="cuartobimestrecuantitativo" id="field_cuartobimestrecuantitativo"
+                [(ngModel)]="calificacion.cuartobimestrecuantitativo" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_primerbimestrecualitativo">Primerbimestrecualitativo</label>
+            <input type="text" class="form-control" name="primerbimestrecualitativo" id="field_primerbimestrecualitativo"
+                [(ngModel)]="calificacion.primerbimestrecualitativo" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_segundobimestrecualitativo">Segundobimestrecualitativo</label>
+            <input type="text" class="form-control" name="segundobimestrecualitativo" id="field_segundobimestrecualitativo"
+                [(ngModel)]="calificacion.segundobimestrecualitativo" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_tercerbimestrecualitativo">Tercerbimestrecualitativo</label>
+            <input type="text" class="form-control" name="tercerbimestrecualitativo" id="field_tercerbimestrecualitativo"
+                [(ngModel)]="calificacion.tercerbimestrecualitativo" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_cuartobimestrecualitativo">Cuartobimestrecualitativo</label>
+            <input type="text" class="form-control" name="cuartobimestrecualitativo" id="field_cuartobimestrecualitativo"
+                [(ngModel)]="calificacion.cuartobimestrecualitativo" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_materia">Materia</label>
+            <select class="form-control" id="field_materia" name="materia" [(ngModel)]="calificacion.materia" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="materiaOption.id === calificacion.materia?.id ? calificacion.materia : materiaOption" *ngFor="let materiaOption of materias; trackBy: trackMateriaById">{{materiaOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_userestudiante">Userestudiante</label>
+            <select class="form-control" id="field_userestudiante" name="userestudiante" [(ngModel)]="calificacion.userestudiante" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userOption.id === calificacion.userestudiante?.id ? calificacion.userestudiante : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_curso">Curso</label>
+            <select class="form-control" id="field_curso" name="curso" [(ngModel)]="calificacion.curso" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="cursoOption.id === calificacion.curso?.id ? calificacion.curso : cursoOption" *ngFor="let cursoOption of cursos; trackBy: trackCursoById">{{cursoOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,39 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "imagen",
+            "otherEntityName": "imagen",
+            "otherEntityRelationshipName": "anuncio"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "curso",
+            "otherEntityName": "curso",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "materia",
+            "otherEntityName": "materia",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nombre",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "descripcion",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180614043224",
+    "entityTableName": "anuncio",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

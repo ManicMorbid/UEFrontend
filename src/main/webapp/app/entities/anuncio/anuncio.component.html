@@ -1,0 +1,72 @@
+<div>
+    <h2>
+        <span>Anuncios</span>
+        <button class="btn btn-primary float-right jh-create-entity create-anuncio" [routerLink]="['/', { outlets: { popup: ['anuncio-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Anuncio
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="anuncios">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Nombre</span></th>
+            <th><span>Descripcion</span></th>
+            <th><span>Curso</span></th>
+            <th><span>Materia</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let anuncio of anuncios ;trackBy: trackId">
+                <td><a [routerLink]="['../anuncio', anuncio.id ]">{{anuncio.id}}</a></td>
+                <td>{{anuncio.nombre}}</td>
+                <td>{{anuncio.descripcion}}</td>
+                <td>
+                    <div *ngIf="anuncio.curso">
+                        <a [routerLink]="['../curso', anuncio.curso?.id ]" >{{anuncio.curso?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="anuncio.materia">
+                        <a [routerLink]="['../materia', anuncio.materia?.id ]" >{{anuncio.materia?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../anuncio', anuncio.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'anuncio/'+ anuncio.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'anuncio/'+ anuncio.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

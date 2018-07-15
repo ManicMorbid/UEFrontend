@@ -58,8 +58,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String email;
 
     @NotNull
-    @Column(nullable = false)
-    private boolean activated = false;
+    @Column(nullable = true)
+    private boolean activated = true;
 
     @Size(min = 2, max = 6)
     @Column(name = "lang_key", length = 6)

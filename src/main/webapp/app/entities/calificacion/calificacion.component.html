@@ -1,0 +1,88 @@
+<div>
+    <h2>
+        <span>Calificacions</span>
+        <button class="btn btn-primary float-right jh-create-entity create-calificacion" [routerLink]="['/', { outlets: { popup: ['calificacion-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Calificacion
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="calificacions">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Primerbimestrecuantitativo</span></th>
+            <th><span>Segundobimestrecuantitativo</span></th>
+            <th><span>Tercerbimestrecuantitativo</span></th>
+            <th><span>Cuartobimestrecuantitativo</span></th>
+            <th><span>Primerbimestrecualitativo</span></th>
+            <th><span>Segundobimestrecualitativo</span></th>
+            <th><span>Tercerbimestrecualitativo</span></th>
+            <th><span>Cuartobimestrecualitativo</span></th>
+            <th><span>Materia</span></th>
+            <th><span>Userestudiante</span></th>
+            <th><span>Curso</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let calificacion of calificacions ;trackBy: trackId">
+                <td><a [routerLink]="['../calificacion', calificacion.id ]">{{calificacion.id}}</a></td>
+                <td>{{calificacion.primerbimestrecuantitativo}}</td>
+                <td>{{calificacion.segundobimestrecuantitativo}}</td>
+                <td>{{calificacion.tercerbimestrecuantitativo}}</td>
+                <td>{{calificacion.cuartobimestrecuantitativo}}</td>
+                <td>{{calificacion.primerbimestrecualitativo}}</td>
+                <td>{{calificacion.segundobimestrecualitativo}}</td>
+                <td>{{calificacion.tercerbimestrecualitativo}}</td>
+                <td>{{calificacion.cuartobimestrecualitativo}}</td>
+                <td>
+                    <div *ngIf="calificacion.materia">
+                        <a [routerLink]="['../materia', calificacion.materia?.id ]" >{{calificacion.materia?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{calificacion.userestudiante?.id}}
+                </td>
+                <td>
+                    <div *ngIf="calificacion.curso">
+                        <a [routerLink]="['../curso', calificacion.curso?.id ]" >{{calificacion.curso?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../calificacion', calificacion.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'calificacion/'+ calificacion.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'calificacion/'+ calificacion.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

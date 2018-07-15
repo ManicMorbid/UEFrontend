@@ -1,0 +1,53 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "ambiente",
+            "otherEntityName": "ambiente",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "curso"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "curso",
+            "relationshipName": "materia",
+            "otherEntityName": "materia",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "estudiante",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nivel",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "grado",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "paralelo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "gestion",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180614043220",
+    "entityTableName": "curso",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

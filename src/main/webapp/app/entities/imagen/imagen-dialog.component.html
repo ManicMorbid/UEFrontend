@@ -1,0 +1,71 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myImagenLabel">Create or edit a Imagen</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!imagen.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="imagen.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_nombre">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="field_nombre"
+                [(ngModel)]="imagen.nombre" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_fecha">Fecha</label>
+            <div class="input-group">
+                <input id="field_fecha" type="text" class="form-control" name="fecha" ngbDatepicker  #fechaDp="ngbDatepicker" [(ngModel)]="imagen.fecha"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="fechaDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_img">Img</label>
+            <div>
+                <img [src]="'data:' + imagen.imgContentType + ';base64,' + imagen.img" style="max-height: 100px;" *ngIf="imagen.img" alt="imagen image"/>
+                <div *ngIf="imagen.img" class="form-text text-danger clearfix">
+                    <span class="pull-left">{{imagen.imgContentType}}, {{byteSize(imagen.img)}}</span>
+                    <button type="button" (click)="clearInputImage('img', 'imgContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_img" (change)="setFileData($event, imagen, 'img', true)" accept="image/*"/>
+            </div>
+            <input type="hidden" class="form-control" name="img" id="field_img"
+                [(ngModel)]="imagen.img" />
+            <input type="hidden" class="form-control" name="imgContentType" id="field_imgContentType"
+                [(ngModel)]="imagen.imgContentType" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_actividad">Actividad</label>
+            <select class="form-control" id="field_actividad" name="actividad" [(ngModel)]="imagen.actividad" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="actividadOption.id === imagen.actividad?.id ? imagen.actividad : actividadOption" *ngFor="let actividadOption of actividads; trackBy: trackActividadById">{{actividadOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_anuncio">Anuncio</label>
+            <select class="form-control" id="field_anuncio" name="anuncio" [(ngModel)]="imagen.anuncio" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="anuncioOption.id === imagen.anuncio?.id ? imagen.anuncio : anuncioOption" *ngFor="let anuncioOption of anuncios; trackBy: trackAnuncioById">{{anuncioOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

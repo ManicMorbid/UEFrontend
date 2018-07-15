@@ -1,0 +1,71 @@
+entity Colegio{
+	nombre String,
+    direccion String,
+    telefono String,
+    email String,
+    sie String
+}
+entity Actividad{
+	nombre String,
+    descripcion String
+}
+entity Imagen {
+	nombre String,
+    fecha LocalDate,
+    img ImageBlob
+}
+entity Ambiente {
+	nombre String,
+    capacidad Integer
+    descripcion String
+}
+entity Curso {
+	nivel String,
+    grado String,
+    paralelo String,
+    gestion Integer
+}
+entity Materia {
+	nombre String,
+    descripcion String,
+    grado String
+}
+entity Falta {
+	fecha LocalDate,
+    licencia Boolean
+}
+entity Calificacion {
+	primer_bimestre_cuantitativo Integer,
+    segundo_bimestre_cuantitativo Integer,
+    tercer_bimestre_cuantitativo Integer,
+    cuarto_bimestre_cuantitativo Integer,
+    primer_bimestre_cualitativo String,
+    segundo_bimestre_cualitativo String,
+    tercer_bimestre_cualitativo String,
+    cuarto_bimestre_cualitativo String,
+}
+entity Anuncio {
+	nombre String,
+    descripcion String
+}
+
+relationship ManyToMany {
+	Curso{materia} to Materia{curso},
+    Curso{estudiante} to User
+}
+relationship OneToOne {
+	Curso{ambiente} to Ambiente,
+    Materia{profesor} to User
+}
+relationship ManyToOne{
+	Anuncio{curso} to Curso,
+    Anuncio{materia} to Materia,
+    Falta{user_estudiante} to User,
+    Calificacion{materia} to Materia,
+    Calificacion{user_estudiante} to User,
+    Calificacion{curso} to Curso
+}
+relationship OneToMany{
+	Actividad{imagen} to Imagen,
+    Anuncio{imagen} to Imagen
+}

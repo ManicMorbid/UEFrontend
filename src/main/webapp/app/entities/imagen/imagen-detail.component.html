@@ -1,0 +1,51 @@
+
+<div *ngIf="imagen">
+    <h2><span>Imagen</span> {{imagen.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Nombre</span></dt>
+        <dd>
+            <span>{{imagen.nombre}}</span>
+        </dd>
+        <dt><span>Fecha</span></dt>
+        <dd>
+            <span>{{imagen.fecha | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Img</span></dt>
+        <dd>
+            <div *ngIf="imagen.img">
+                <a (click)="openFile(imagen.imgContentType, imagen.img)">
+                    <img [src]="'data:' + imagen.imgContentType + ';base64,' + imagen.img" style="max-width: 100%;" alt="imagen image"/>
+                </a>
+                {{imagen.imgContentType}}, {{byteSize(imagen.img)}}
+            </div>
+        </dd>
+        <dt><span>Actividad</span></dt>
+        <dd>
+            <div *ngIf="imagen.actividad">
+                <a [routerLink]="['/actividad', imagen.actividad?.id]">{{imagen.actividad?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Anuncio</span></dt>
+        <dd>
+            <div *ngIf="imagen.anuncio">
+                <a [routerLink]="['/anuncio', imagen.anuncio?.id]">{{imagen.anuncio?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'imagen/'+ imagen.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

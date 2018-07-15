@@ -1,0 +1,49 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myAnuncioLabel">Create or edit a Anuncio</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!anuncio.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="anuncio.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_nombre">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="field_nombre"
+                [(ngModel)]="anuncio.nombre" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_descripcion">Descripcion</label>
+            <input type="text" class="form-control" name="descripcion" id="field_descripcion"
+                [(ngModel)]="anuncio.descripcion" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_curso">Curso</label>
+            <select class="form-control" id="field_curso" name="curso" [(ngModel)]="anuncio.curso" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="cursoOption.id === anuncio.curso?.id ? anuncio.curso : cursoOption" *ngFor="let cursoOption of cursos; trackBy: trackCursoById">{{cursoOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_materia">Materia</label>
+            <select class="form-control" id="field_materia" name="materia" [(ngModel)]="anuncio.materia" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="materiaOption.id === anuncio.materia?.id ? anuncio.materia : materiaOption" *ngFor="let materiaOption of materias; trackBy: trackMateriaById">{{materiaOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,70 @@
+
+<div *ngIf="calificacion">
+    <h2><span>Calificacion</span> {{calificacion.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Primerbimestrecuantitativo</span></dt>
+        <dd>
+            <span>{{calificacion.primerbimestrecuantitativo}}</span>
+        </dd>
+        <dt><span>Segundobimestrecuantitativo</span></dt>
+        <dd>
+            <span>{{calificacion.segundobimestrecuantitativo}}</span>
+        </dd>
+        <dt><span>Tercerbimestrecuantitativo</span></dt>
+        <dd>
+            <span>{{calificacion.tercerbimestrecuantitativo}}</span>
+        </dd>
+        <dt><span>Cuartobimestrecuantitativo</span></dt>
+        <dd>
+            <span>{{calificacion.cuartobimestrecuantitativo}}</span>
+        </dd>
+        <dt><span>Primerbimestrecualitativo</span></dt>
+        <dd>
+            <span>{{calificacion.primerbimestrecualitativo}}</span>
+        </dd>
+        <dt><span>Segundobimestrecualitativo</span></dt>
+        <dd>
+            <span>{{calificacion.segundobimestrecualitativo}}</span>
+        </dd>
+        <dt><span>Tercerbimestrecualitativo</span></dt>
+        <dd>
+            <span>{{calificacion.tercerbimestrecualitativo}}</span>
+        </dd>
+        <dt><span>Cuartobimestrecualitativo</span></dt>
+        <dd>
+            <span>{{calificacion.cuartobimestrecualitativo}}</span>
+        </dd>
+        <dt><span>Materia</span></dt>
+        <dd>
+            <div *ngIf="calificacion.materia">
+                <a [routerLink]="['/materia', calificacion.materia?.id]">{{calificacion.materia?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Userestudiante</span></dt>
+        <dd>
+            {{calificacion.userestudiante?.id}}
+        </dd>
+        <dt><span>Curso</span></dt>
+        <dd>
+            <div *ngIf="calificacion.curso">
+                <a [routerLink]="['/curso', calificacion.curso?.id]">{{calificacion.curso?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'calificacion/'+ calificacion.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

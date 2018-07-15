@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "profesor",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "materia"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "curso",
+            "otherEntityName": "curso",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "materia"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nombre",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "descripcion",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "grado",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180614043221",
+    "entityTableName": "materia",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

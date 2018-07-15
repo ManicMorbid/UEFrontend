@@ -1,0 +1,42 @@
+
+<div *ngIf="anuncio">
+    <h2><span>Anuncio</span> {{anuncio.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Nombre</span></dt>
+        <dd>
+            <span>{{anuncio.nombre}}</span>
+        </dd>
+        <dt><span>Descripcion</span></dt>
+        <dd>
+            <span>{{anuncio.descripcion}}</span>
+        </dd>
+        <dt><span>Curso</span></dt>
+        <dd>
+            <div *ngIf="anuncio.curso">
+                <a [routerLink]="['/curso', anuncio.curso?.id]">{{anuncio.curso?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Materia</span></dt>
+        <dd>
+            <div *ngIf="anuncio.materia">
+                <a [routerLink]="['/materia', anuncio.materia?.id]">{{anuncio.materia?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'anuncio/'+ anuncio.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,64 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myCursoLabel">Create or edit a Curso</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!curso.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="curso.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_nivel">Nivel</label>
+            <input type="text" class="form-control" name="nivel" id="field_nivel"
+                [(ngModel)]="curso.nivel" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_grado">Grado</label>
+            <input type="text" class="form-control" name="grado" id="field_grado"
+                [(ngModel)]="curso.grado" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_paralelo">Paralelo</label>
+            <input type="text" class="form-control" name="paralelo" id="field_paralelo"
+                [(ngModel)]="curso.paralelo" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_gestion">Gestion</label>
+            <input type="number" class="form-control" name="gestion" id="field_gestion"
+                [(ngModel)]="curso.gestion" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_ambiente">Ambiente</label>
+            <select class="form-control" id="field_ambiente" name="ambiente" [(ngModel)]="curso.ambiente">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="ambienteOption.id === curso.ambiente?.id ? curso.ambiente : ambienteOption" *ngFor="let ambienteOption of ambientes; trackBy: trackAmbienteById">{{ambienteOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_materia">Materia</label>
+            <select class="form-control" id="field_materia" multiple name="materia" [(ngModel)]="curso.materias">
+                <option [ngValue]="getSelected(curso.materias, materiaOption)" *ngFor="let materiaOption of materias; trackBy: trackMateriaById">{{materiaOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_estudiante">Estudiante</label>
+            <select class="form-control" id="field_estudiante" multiple name="estudiante" [(ngModel)]="curso.estudiantes">
+                <option [ngValue]="getSelected(curso.estudiantes, userOption)" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
